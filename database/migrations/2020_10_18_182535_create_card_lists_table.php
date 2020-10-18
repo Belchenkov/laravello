@@ -15,6 +15,9 @@ class CreateCardListsTable extends Migration
     {
         Schema::create('card_lists', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+
+            $table->foreignId('board_id')->constrained('boards');
             $table->timestamps();
         });
     }
