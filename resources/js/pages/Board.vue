@@ -11,9 +11,8 @@
                 <span v-if="$apollo.queries.board.loading">Loading...</span>
                 <span v-else>{{ board.title }}</span>
             </div>
-            <div class="flex flex-1 items-start overflow-x-auto mx-2">
+            <div v-if="board" class="flex flex-1 items-start overflow-x-auto mx-2">
                 <List
-                    v-if="board"
                     v-for="list in board.lists"
                     :key="list.id"
                     :list="list"
