@@ -1,0 +1,15 @@
+query BoardListsCards($id: ID!) {
+    board(id: $id) {
+        color
+        title
+        lists {
+            id
+            title
+            cards {
+                id
+                title
+                order
+            }
+        }
+    }
+}

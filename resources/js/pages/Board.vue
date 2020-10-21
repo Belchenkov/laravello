@@ -24,8 +24,8 @@
 </template>
 
 <script>
-    import gql from 'graphql-tag';
     import List from "../components/List";
+    import BoardQuery from "../graphql/BoardListsCards.gql";
 
     export default {
         components: {
@@ -33,22 +33,7 @@
         },
         apollo: {
             board: {
-                query: gql`
-                    query($id: ID!) {
-                      board(id: $id) {
-                        color
-                        title
-                        lists {
-                          id
-                          title
-                          cards {
-                            id
-                            title
-                            order
-                          }
-                        }
-                   }
-                }`,
+                query: BoardQuery,
                 variables: {
                     id: 1
                 }
