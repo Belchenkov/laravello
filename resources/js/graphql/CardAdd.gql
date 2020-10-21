@@ -5,7 +5,7 @@ mutation CardAdd(
 ) {
     cardAdd(input: {
       title: $title,
-      list_id: $list_id,
+      list_id: $listId,
       order: $order,
       owner_id: 1
     }) {
