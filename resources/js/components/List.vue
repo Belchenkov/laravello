@@ -8,6 +8,7 @@
             :key="card.id"
             :card="card"
         />
+        <CardEditor />
         <CardAddButton />
     </div>
 </template>
@@ -15,6 +16,7 @@
 <script>
 import Card from "./Card";
 import CardAddButton from "./CardAddButton";
+import CardEditor from "./CardEditor";
 
 export default {
     name: "List",
@@ -23,7 +25,8 @@ export default {
     ],
     components: {
         Card,
-        CardAddButton
+        CardAddButton,
+        CardEditor
     }
 }
 </script>
