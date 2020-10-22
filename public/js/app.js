@@ -5667,35 +5667,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "CardAddButton",
-  methods: {
-    addCard: function addCard() {
-      this.$apollo.mutate({
-        mutation: _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0___default.a,
-        variables: {
-          title: 'Added through mutation',
-          listId: 1,
-          order: 1
-        },
-        update: function update(store, _ref) {
-          var cardAdd = _ref.data.cardAdd;
-          var data = store.readQuery({
-            query: _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
-            variables: {
-              id: 1
-            }
-          });
-          data.board.lists.find(function (list) {
-            return list.id = 1;
-          }).cards.push(cardAdd);
-          store.writeQuery({
-            query: _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
-            data: data
-          });
-        }
-      });
-    }
-  }
+  name: "CardAddButton"
 });
 
 /***/ }),
@@ -5709,6 +5681,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../graphql/CardAdd.gql */ "./resources/js/graphql/CardAdd.gql");
+/* harmony import */ var _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphql/BoardListsCards.gql */ "./resources/js/graphql/BoardListsCards.gql");
+/* harmony import */ var _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -5719,12 +5695,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['list'],
   name: "CardEditor",
   data: function data() {
     return {
       title: null
     };
+  },
+  mounted: function mounted() {
+    this.$refs.card.focus();
+  },
+  methods: {
+    addCard: function addCard() {
+      var self = this;
+      this.$apollo.mutate({
+        mutation: _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0___default.a,
+        variables: {
+          title: this.title,
+          listId: this.list.id,
+          order: this.list.cards.length + 1
+        },
+        update: function update(store, _ref) {
+          var cardAdd = _ref.data.cardAdd;
+          var data = store.readQuery({
+            query: _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
+            variables: {
+              id: +self.list.board_id
+            }
+          });
+          data.board.lists.find(function (list) {
+            return list.id === self.list.id;
+          }).cards.push(cardAdd);
+          store.writeQuery({
+            query: _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
+            data: data
+          });
+        }
+      });
+      this.closed();
+    },
+    closed: function closed() {
+      this.$emit('closed');
+    }
   }
 });
 
@@ -5757,12 +5789,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "List",
   props: ['list'],
+  data: function data() {
+    return {
+      editing: false
+    };
+  },
   components: {
     Card: _Card__WEBPACK_IMPORTED_MODULE_0__["default"],
     CardAddButton: _CardAddButton__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -31607,7 +31650,11 @@ var render = function() {
     {
       staticClass:
         "hover:text-gray-800 text-sm rounded-sm p-2 text-gray-600 cursor-pointer hover:bg-gray-400",
-      on: { click: _vm.addCard }
+      on: {
+        click: function($event) {
+          return _vm.$emit("click")
+        }
+      }
     },
     [
       _c("i", { staticClass: "fas fa-plus mr-2" }),
@@ -31647,11 +31694,32 @@ var render = function() {
           expression: "title"
         }
       ],
+      ref: "card",
       staticClass:
         "shadow-card rounded-md py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none",
       attrs: { placeholder: "Enter a title for this card..." },
       domProps: { value: _vm.title },
       on: {
+        keyup: [
+          function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
+            ) {
+              return null
+            }
+            return _vm.closed($event)
+          },
+          function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.addCard($event)
+          }
+        ],
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -31659,7 +31727,32 @@ var render = function() {
           _vm.title = $event.target.value
         }
       }
-    })
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex my-1 justify-between" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "rounded-sm py-1 px-3 bg-blue-600 text-white cursor-pointer hover:bg-blue-400 outline-none",
+          on: { click: _vm.addCard }
+        },
+        [
+          _c("i", { staticClass: "fas fa-plus" }),
+          _vm._v("\n            Add Card\n        ")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "py-1 px-3 rounded-md hover:bg-gray-400 cursor-pointer text-gray-500",
+          on: { click: _vm.closed }
+        },
+        [_c("i", { staticClass: "fas fa-times" })]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -31698,9 +31791,22 @@ var render = function() {
         return _c("Card", { key: card.id, attrs: { card: card } })
       }),
       _vm._v(" "),
-      _c("CardEditor"),
-      _vm._v(" "),
-      _c("CardAddButton")
+      _vm.editing
+        ? _c("CardEditor", {
+            attrs: { list: _vm.list },
+            on: {
+              closed: function($event) {
+                _vm.editing = false
+              }
+            }
+          })
+        : _c("CardAddButton", {
+            on: {
+              click: function($event) {
+                _vm.editing = true
+              }
+            }
+          })
     ],
     2
   )
@@ -45030,8 +45136,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 
-    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BoardListsCards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"lists"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"cards"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]}]}}]}}]}}]}}],"loc":{"start":0,"end":247}};
-    doc.loc.source = {"body":"query BoardListsCards($id: ID!) {\n    board(id: $id) {\n        color\n        title\n        lists {\n            id\n            title\n            cards {\n                id\n                title\n                order\n            }\n        }\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BoardListsCards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"lists"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board_id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"cards"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]}]}}]}}]}}]}}],"loc":{"start":0,"end":268}};
+    doc.loc.source = {"body":"query BoardListsCards($id: ID!) {\n    board(id: $id) {\n        color\n        title\n        lists {\n            id\n            title\n            board_id\n            cards {\n                id\n                title\n                order\n            }\n        }\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
   
 
     var names = {};

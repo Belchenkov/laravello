@@ -8,8 +8,14 @@
             :key="card.id"
             :card="card"
         />
-        <CardEditor />
-        <CardAddButton />
+        <CardEditor
+            :list="list"
+            @closed="editing = false"
+            v-if="editing" />
+        <CardAddButton
+            @click="editing = true"
+            v-else
+        />
     </div>
 </template>
 
@@ -23,6 +29,11 @@ export default {
     props: [
         'list'
     ],
+    data() {
+        return {
+            editing: false
+        }
+    },
     components: {
         Card,
         CardAddButton,
