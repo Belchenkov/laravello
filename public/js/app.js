@@ -5634,6 +5634,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
   props: ['card']
@@ -31618,12 +31626,41 @@ var render = function() {
     "div",
     {
       staticClass:
-        "shadow-card bg-white card rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2"
+        "group shadow-card bg-white card rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2 flex justify-between"
     },
-    [_vm._v("\n    " + _vm._s(_vm.card.title) + "\n")]
+    [_c("div", [_vm._v(_vm._s(_vm.card.title))]), _vm._v(" "), _vm._m(0)]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "cursor-pointer text-orange-400 hover:text-orange-500 pr-3"
+          },
+          [_c("i", { staticClass: "fas fa-edit" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "cursor-pointer text-red-500 hover:text-red-600" },
+          [_c("i", { staticClass: "fas fa-trash-alt" })]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
