@@ -13,6 +13,7 @@
             </div>
             <div v-if="board" class="flex flex-1 items-start overflow-x-auto mx-2">
                 <List
+                    @card-added="updateQueryCache($event)"
                     v-for="list in board.lists"
                     :key="list.id"
                     :list="list"
@@ -36,6 +37,22 @@
                 variables: {
                     id: 1
                 }
+            }
+        },
+        methods: {
+            updateQueryCache(event) {
+                const data = event.store.readQuery({
+                    query: BoardQuery,
+                    variables: {
+                        id: +this.board.id
+                    }
+                });
+
+                data.board.lists
+                    .find(list => list.id === event.listId)
+                    .cards
+                    .push(event.data);
+                event.store.writeQuery({ query: BoardQuery, data });
             }
         }
     }

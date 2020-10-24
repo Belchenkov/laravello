@@ -11,7 +11,9 @@
         <CardEditor
             :list="list"
             @closed="editing = false"
-            v-if="editing" />
+            @added="$emit('card-added', { ...$event, listId: list.id })"
+            v-if="editing"
+        />
         <CardAddButton
             @click="editing = true"
             v-else

@@ -5,19 +5,33 @@
             <div class="cursor-pointer text-orange-400 hover:text-orange-500 pr-3">
                 <i class="fas fa-edit"></i>
             </div>
-            <div class="cursor-pointer text-red-500 hover:text-red-600">
+            <div
+                @click="cardDelete"
+                class="cursor-pointer text-red-500 hover:text-red-600"
+            >
                 <i class="fas fa-trash-alt"></i>
             </div>
         </div>
     </div>
 </template>
-
 <script>
+import CardDelete from "../graphql/CardDelete.gql";
+
 export default {
     name: "Card",
     props: [
         'card'
-    ]
+    ],
+    methods: {
+        cardDelete() {
+            this.$apollo.mutate({
+                mutation: CardDelete,
+                variables: {
+                    id: this.card.id
+                }
+            });
+        }
+    }
 }
 </script>
 
