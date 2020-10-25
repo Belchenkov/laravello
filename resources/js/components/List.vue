@@ -9,7 +9,7 @@
             :card="card"
             @deleted="$emit('card-deleted', { ...$event, listId: list.id })"
         />
-        <CardEditor
+        <CardAddEditor
             :list="list"
             @closed="editing = false"
             @added="$emit('card-added', { ...$event, listId: list.id })"
@@ -25,7 +25,7 @@
 <script>
 import Card from "./Card";
 import CardAddButton from "./CardAddButton";
-import CardEditor from "./CardEditor";
+import CardAddEditor from "./CardAddEditor";
 
 export default {
     name: "List",
@@ -40,7 +40,7 @@ export default {
     components: {
         Card,
         CardAddButton,
-        CardEditor
+        CardAddEditor
     }
 }
 </script>

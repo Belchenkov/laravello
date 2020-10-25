@@ -3,14 +3,15 @@
         <textarea
             class="shadow-card rounded-md py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none"
             placeholder="Enter a title for this card..."
-            v-model="title"
+            :value="value"
             ref="card"
             @keyup.esc="closed"
-            @keyup.enter="addCard"
+            @keyup.enter="saved"
+            @input="$emit('input', $event.target.value)"
         ></textarea>
         <div class="flex my-1 justify-between">
             <button
-                @click="addCard"
+                @click="saved"
                 class="rounded-sm py-1 px-3 bg-blue-600 text-white cursor-pointer hover:bg-blue-400 outline-none"
             >
                 <i class="fas fa-plus"></i>
@@ -26,44 +27,21 @@
 </template>
 
 <script>
-import CardAdd from "../graphql/CardAdd.gql";
-import { EVENT_CARD_ADDED } from "../constants";
 
 export default {
     props: [
-        'list'
+        'value'
     ],
     name: "CardEditor",
-    data() {
-        return {
-            title: null
-        }
-    },
     mounted() {
         this.$refs.card.focus();
     },
     methods: {
-        addCard() {
-            const self = this;
-            this.$apollo.mutate({
-                mutation: CardAdd,
-                variables: {
-                    title: this.title,
-                    listId: this.list.id,
-                    order: this.list.cards.length + 1
-                },
-                update(store, { data: { cardAdd } }) {
-                    self.$emit("added", {
-                        store,
-                        data: cardAdd,
-                        type: EVENT_CARD_ADDED
-                    });
-                    self.$emit('closed');
-                }
-            });
-        },
         closed() {
             this.$emit('closed');
+        },
+        saved() {
+            this.$emit('saved');
         }
     }
 }
