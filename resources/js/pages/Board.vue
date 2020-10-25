@@ -14,6 +14,7 @@
             <div v-if="board" class="flex flex-1 items-start overflow-x-auto mx-2">
                 <List
                     @card-added="updateQueryCache($event)"
+                    @card-deleted="updateQueryCache($event)"
                     v-for="list in board.lists"
                     :key="list.id"
                     :list="list"
@@ -26,6 +27,7 @@
 <script>
     import List from "../components/List";
     import BoardQuery from "../graphql/BoardListsCards.gql";
+    import { EVENT_CARD_ADDED, EVENT_CARD_DELETED } from "../constants";
 
     export default {
         components: {
@@ -48,10 +50,19 @@
                     }
                 });
 
-                data.board.lists
-                    .find(list => list.id === event.listId)
-                    .cards
-                    .push(event.data);
+                const listById = () => {
+                    return data.board.lists.find(list => list.id === event.listId);
+                };
+
+                switch (event.type) {
+                    case EVENT_CARD_ADDED:
+                        listById().cards.push(event.data);
+                        break;
+                    case EVENT_CARD_DELETED:
+                        listById().cards = listById().cards.filter(card => card.id !== event.data.id);
+                        break;
+                }
+
                 event.store.writeQuery({ query: BoardQuery, data });
             }
         }
