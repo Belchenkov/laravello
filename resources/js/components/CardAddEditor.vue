@@ -3,6 +3,8 @@
         v-model="title"
         @closed="closed"
         @saved="addCard"
+        label="Add Card"
+        icon="fas fa-plus"
     />
 </template>
 

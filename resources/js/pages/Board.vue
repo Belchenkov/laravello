@@ -15,6 +15,7 @@
                 <List
                     @card-added="updateQueryCache($event)"
                     @card-deleted="updateQueryCache($event)"
+                    @card-updated="updateQueryCache($event)"
                     v-for="list in board.lists"
                     :key="list.id"
                     :list="list"
@@ -27,7 +28,7 @@
 <script>
     import List from "../components/List";
     import BoardQuery from "../graphql/BoardListsCards.gql";
-    import { EVENT_CARD_ADDED, EVENT_CARD_DELETED } from "../constants";
+    import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "../constants";
 
     export default {
         components: {
@@ -60,6 +61,9 @@
                         break;
                     case EVENT_CARD_DELETED:
                         listById().cards = listById().cards.filter(card => card.id !== event.data.id);
+                        break;
+                    case EVENT_CARD_UPDATED:
+                        listById().cards.filter(card => card.id === event.data.id).title = event.data.title;
                         break;
                 }
 

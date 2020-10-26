@@ -14,8 +14,8 @@
                 @click="saved"
                 class="rounded-sm py-1 px-3 bg-blue-600 text-white cursor-pointer hover:bg-blue-400 outline-none"
             >
-                <i class="fas fa-plus"></i>
-                Add Card
+                <i :class="[icon, 'mr-1']"></i>
+                {{ label }}
             </button>
             <button
                 @click="closed"
@@ -30,7 +30,9 @@
 
 export default {
     props: [
-        'value'
+        'value',
+        'icon',
+        'label'
     ],
     name: "CardEditor",
     mounted() {
