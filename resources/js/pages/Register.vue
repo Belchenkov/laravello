@@ -9,7 +9,7 @@
             </div>
 
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
-                <div class="w-full text-center text-blue-600 font-bold mb-8">Log in to Laravello</div>
+                <div class="w-full text-center text-blue-600 font-bold mb-8">Signup for your account</div>
 
                 <form>
                     <div class="w-full mb-4">
@@ -19,6 +19,17 @@
                                 type="email"
                                 class="rounded-sm w-full text-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2"
                                 placeholder="Enter email"
+                            />
+                        </div>
+
+                    </div>
+                    <div class="w-full mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-user mr-2 input-icon"></i>
+                            <input
+                                type="text"
+                                class="rounded-sm w-full text-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2"
+                                placeholder="Enter full name"
                             />
                         </div>
 
@@ -40,7 +51,7 @@
                             class="rounded-2xl w-2/3 disabled:opacity-25 text-white px-4 py-2 text-sm bg-green-400 font-bold outline-none focus:outline-none hover:bg-opacity-75"
                         >
                             <i class="fas fa-sign-in-alt mr-1"></i>
-                            Login
+                            Register
                         </button>
                     </div>
 
@@ -48,9 +59,9 @@
 
                     <div class="text-center text-sm">
                         <router-link
-                            :to="{name: 'register'}"
+                            :to="{name: 'login'}"
                             class="text-blue-600 hover:underline"
-                        >Sign up for an account</router-link>
+                        >Already have an account? Log in</router-link>
                     </div>
                 </form>
             </div>
