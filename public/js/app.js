@@ -6042,6 +6042,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../graphql/Login.gql */ "./resources/js/graphql/Login.gql");
+/* harmony import */ var _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_Login_gql__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -6102,8 +6104,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Login"
+  name: "Login",
+  data: function data() {
+    return {
+      email: null,
+      password: null
+    };
+  },
+  methods: {
+    authenticate: function authenticate() {
+      this.$apollo.mutate({
+        mutation: _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_0___default.a,
+        variables: {
+          email: this.email,
+          password: this.password
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -32473,31 +32495,101 @@ var render = function() {
                 [_vm._v("Log in to Laravello")]
               ),
               _vm._v(" "),
-              _c("form", [
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
-                _c("div", { staticClass: "bg-gray-400 h-px w-full mb-6" }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center text-sm" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "text-blue-600 hover:underline",
-                        attrs: { to: { name: "register" } }
-                      },
-                      [_vm._v("Sign up for an account")]
-                    )
-                  ],
-                  1
-                )
-              ])
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.authenticate($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "w-full mb-4" }, [
+                    _c("div", { staticClass: "flex items-center" }, [
+                      _c("i", {
+                        staticClass: "far fa-envelope mr-2 input-icon"
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.email,
+                            expression: "email"
+                          }
+                        ],
+                        staticClass:
+                          "rounded-sm w-full text-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2",
+                        attrs: { type: "email", placeholder: "Enter email" },
+                        domProps: { value: _vm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.email = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-4" }, [
+                    _c("div", { staticClass: "flex items-center" }, [
+                      _c("i", { staticClass: "fas fa-key mr-2 input-icon" }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.password,
+                            expression: "password"
+                          }
+                        ],
+                        staticClass:
+                          "rounded-sm w-full text-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2",
+                        attrs: {
+                          type: "password",
+                          placeholder: "Enter password"
+                        },
+                        domProps: { value: _vm.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.password = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "bg-gray-400 h-px w-full mb-6" }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-center text-sm" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "text-blue-600 hover:underline",
+                          attrs: { to: { name: "register" } }
+                        },
+                        [_vm._v("Sign up for an account")]
+                      )
+                    ],
+                    1
+                  )
+                ]
+              )
             ]
           )
         ]
@@ -32519,38 +32611,6 @@ var staticRenderFns = [
         _c("span", [_vm._v("Laravello")])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-4" }, [
-      _c("div", { staticClass: "flex items-center" }, [
-        _c("i", { staticClass: "far fa-envelope mr-2 input-icon" }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "rounded-sm w-full text-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2",
-          attrs: { type: "email", placeholder: "Enter email" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mb-4" }, [
-      _c("div", { staticClass: "flex items-center" }, [
-        _c("i", { staticClass: "fas fa-key mr-2 input-icon" }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass:
-            "rounded-sm w-full text-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2",
-          attrs: { type: "password", placeholder: "Enter password" }
-        })
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -49672,6 +49732,139 @@ var EVENT_CARD_DELETED = 'EVENT_CARD_DELETED';
     module.exports = doc;
     
         module.exports["CardUpdate"] = oneQuery(doc, "CardUpdate");
+        
+
+
+/***/ }),
+
+/***/ "./resources/js/graphql/Login.gql":
+/*!****************************************!*\
+  !*** ./resources/js/graphql/Login.gql ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"name"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"email"},"arguments":[],"directives":[]}]}}]}}],"loc":{"start":0,"end":148}};
+    doc.loc.source = {"body":"mutation Login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n        id\n        name\n        email\n    }\n}\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+
+    // Collect any fragment/type references from a node, adding them to the refs Set
+    function collectFragmentReferences(node, refs) {
+      if (node.kind === "FragmentSpread") {
+        refs.add(node.name.value);
+      } else if (node.kind === "VariableDefinition") {
+        var type = node.type;
+        if (type.kind === "NamedType") {
+          refs.add(type.name.value);
+        }
+      }
+
+      if (node.selectionSet) {
+        node.selectionSet.selections.forEach(function(selection) {
+          collectFragmentReferences(selection, refs);
+        });
+      }
+
+      if (node.variableDefinitions) {
+        node.variableDefinitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+
+      if (node.definitions) {
+        node.definitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+    }
+
+    var definitionRefs = {};
+    (function extractReferences() {
+      doc.definitions.forEach(function(def) {
+        if (def.name) {
+          var refs = new Set();
+          collectFragmentReferences(def, refs);
+          definitionRefs[def.name.value] = refs;
+        }
+      });
+    })();
+
+    function findOperation(doc, name) {
+      for (var i = 0; i < doc.definitions.length; i++) {
+        var element = doc.definitions[i];
+        if (element.name && element.name.value == name) {
+          return element;
+        }
+      }
+    }
+
+    function oneQuery(doc, operationName) {
+      // Copy the DocumentNode, but clear out the definitions
+      var newDoc = {
+        kind: doc.kind,
+        definitions: [findOperation(doc, operationName)]
+      };
+      if (doc.hasOwnProperty("loc")) {
+        newDoc.loc = doc.loc;
+      }
+
+      // Now, for the operation we're running, find any fragments referenced by
+      // it or the fragments it references
+      var opRefs = definitionRefs[operationName] || new Set();
+      var allRefs = new Set();
+      var newRefs = new Set();
+
+      // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+      opRefs.forEach(function(refName) {
+        newRefs.add(refName);
+      });
+
+      while (newRefs.size > 0) {
+        var prevRefs = newRefs;
+        newRefs = new Set();
+
+        prevRefs.forEach(function(refName) {
+          if (!allRefs.has(refName)) {
+            allRefs.add(refName);
+            var childRefs = definitionRefs[refName] || new Set();
+            childRefs.forEach(function(childRef) {
+              newRefs.add(childRef);
+            });
+          }
+        });
+      }
+
+      allRefs.forEach(function(refName) {
+        var op = findOperation(doc, refName);
+        if (op) {
+          newDoc.definitions.push(op);
+        }
+      });
+
+      return newDoc;
+    }
+
+    module.exports = doc;
+    
+        module.exports["Login"] = oneQuery(doc, "Login");
         
 
 
