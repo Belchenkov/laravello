@@ -16,6 +16,7 @@ type Mutation {
     cardDelete(id: ID!): Card @delete
 
     login(email: String!, password: String!): User!
+    register(email: String!, password: String!, @hash, name: String!): User @create
     logout: User @guard
 }
 
