@@ -9,6 +9,8 @@
             </div>
 
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
+                <errors :errors="errors" />
+
                 <div class="w-full text-center text-blue-600 font-bold mb-8">Signup for your account</div>
 
                 <form @submit.prevent="register">
@@ -74,6 +76,7 @@
 
 <script>
 import Register from "../graphql/Register.gql";
+import Errors from "../components/Errors";
 import { gqlErrors } from "../utils";
 
 export default {
@@ -85,6 +88,9 @@ export default {
             name: null,
             errors: []
         }
+    },
+    components: {
+        Errors
     },
     methods: {
         async register() {
@@ -99,11 +105,11 @@ export default {
                         name: this.name
                     }
                 });
+                this.$router.push({ name: "board" });
             } catch (err) {
                 this.errors = gqlErrors(err);
             }
 
-            this.$router.push({ name: "board" });
         }
     }
 }

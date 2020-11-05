@@ -9,12 +9,7 @@
             </div>
 
             <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
-                <div
-                    v-if="errors.length"
-                    v-for="(error, index) in errors" :key="index"
-                    class="p-2 bg-red-600 text-gray-100 rounded-sm mb-2 text-sm text-center"
-                >       {{ error.message }}
-                 </div>
+                <errors :errors="errors" />
 
                 <div class="w-full text-center text-blue-600 font-bold mb-8">Log in to Laravello</div>
 
@@ -69,6 +64,7 @@
 
 <script>
 import Login from "../graphql/Login.gql";
+import Errors from "../components/Errors";
 import { gqlErrors } from "../utils";
 
 export default {
@@ -79,6 +75,9 @@ export default {
             password: null,
             errors: []
         }
+    },
+    components: {
+        Errors
     },
     methods: {
         async authenticate() {

@@ -5,9 +5,23 @@ export function gqlErrors(err) {
         : errors;
 
     return replaceInternal(
-        (err?.graphQLErrors || []).map(error => ({
-            message: error.message,
-            internal: Boolean(!(error?.path?.length))
-        })),
-        { message: 'Something bad happened' });
+        (err?.graphQLErrors || []).map(error => {
+            if ("validation" === error.extensions?.category) {
+                const validationErr = error.extensions?.validation || {};
+                return Object
+                        .keys(validationErr)
+                        .map(key => validationErr[key])
+                        .flat()
+                        .map(v => ({
+                            message: v,
+                            internal: false
+                        }));
+            }
+
+            return {
+                message: error.message,
+                internal: Boolean(!(error?.path?.length))
+            }
+        }),
+        { message: 'Something bad happened' }).flat();
 }
