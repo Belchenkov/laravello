@@ -1,0 +1,54 @@
+version: '3'
+services:
+    nginx:
+        build:
+            context: ./docker
+            dockerfile: nginx.docker
+        restart: always
+        volumes:
+            - ./:/var/www
+        ports:
+            - "8001:80"
+        networks:
+          - backend
+    php-fpm:
+        build:
+            context: ./docker
+            dockerfile: php-fpm.docker
+        volumes:
+            - ./:/var/www
+        depends_on:
+          - db
+        networks:
+          - backend
+    php-cli:
+        build:
+            context: ./docker
+            dockerfile: php-cli.docker
+        volumes:
+            - ./:/var/www
+        depends_on:
+          - db
+        networks:
+          - backend
+        working_dir: /var/www
+        tty: true
+    db:
+      image: wangxian/alpine-mysql
+      volumes:
+        - ./storage/docker/mysql:/var/lib/mysql
+      environment:
+        - "MYSQL_ROOT_PASSWORD=secret"
+        - "MYSQL_USER=app"
+        - "MYSQL_PASSWORD=secret"
+        - "MYSQL_DATABASE=app"
+      ports:
+        - "33061:3306"
+      restart: always
+      networks:
+        - backend
+volumes:
+  db:
+networks:
+  backend:
+    driver: bridge
