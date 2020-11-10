@@ -3,7 +3,15 @@
         <div class="header text-white flex justify-between items-center bg-green-600 mb-2">
             <div class="ml-2 w-1/3">x</div>
             <div class="text-lg logo opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
-            <div class="mr-2 w-1/3 flex justify-end">x</div>
+            <div class="mr-2 w-1/3 flex justify-end">
+                <div class="" v-if="isLoggedIn">
+                    <button class="header-btn">Logout</button>
+                </div>
+                <div class="" v-else>
+                    <button class="header-btn" @click="$router.push({name: 'login'})">Sign In</button>
+                    <button class="header-btn">Register</button>
+                </div>
+            </div>
         </div>
 
         <div class="h-full flex flex-1 flex-col items-stretch">
@@ -28,11 +36,21 @@
 <script>
     import List from "../components/List";
     import BoardQuery from "../graphql/BoardListsCards.gql";
-    import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "../constants";
+    import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from "../constants";
+    import { mapGetters } from 'vuex';
 
     export default {
         components: {
             List
+        },
+        data() {
+          return {
+          }
+        },
+        computed: {
+            ...mapGetters([
+                'isLoggedIn'
+            ])
         },
         apollo: {
             board: {

@@ -12,7 +12,10 @@ Vue.component('board', Board);
 
 const app = new Vue({
     el: '#app',
+    apolloProvider,
     store,
     router,
-    apolloProvider
+    beforeCreate() {
+        store.dispatch('setLoggedIn', localStorage.getItem('isLoggedIn') === 'true');
+    }
 });

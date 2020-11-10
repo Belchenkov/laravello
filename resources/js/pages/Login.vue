@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex';
 import Login from "../graphql/Login.gql";
 import Errors from "../components/Errors";
 import { gqlErrors } from "../utils";
@@ -80,6 +81,9 @@ export default {
         Errors
     },
     methods: {
+        ...mapActions([
+            'setLoggedIn'
+        ]),
         async authenticate() {
             this.errros = [];
 
@@ -91,6 +95,8 @@ export default {
                         password: this.password
                     }
                 });
+                this.setLoggedIn(true);
+                this.$router.push({ name: "board" });
             } catch (err) {
                 this.errors = gqlErrors(err);
             }

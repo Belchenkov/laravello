@@ -5993,6 +5993,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphql/BoardListsCards.gql */ "./resources/js/graphql/BoardListsCards.gql");
 /* harmony import */ var _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./resources/js/constants/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -6020,6 +6027,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -6027,6 +6043,10 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     List: _components_List__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  data: function data() {
+    return {};
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['isLoggedIn'])),
   apollo: {
     board: {
       query: _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
@@ -6089,16 +6109,23 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphql/Login.gql */ "./resources/js/graphql/Login.gql");
-/* harmony import */ var _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_Login_gql__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Errors */ "./resources/js/components/Errors.vue");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphql/Login.gql */ "./resources/js/graphql/Login.gql");
+/* harmony import */ var _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_Login_gql__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Errors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Errors */ "./resources/js/components/Errors.vue");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -6163,6 +6190,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 
 
 
@@ -6176,9 +6204,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   components: {
-    Errors: _components_Errors__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Errors: _components_Errors__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['setLoggedIn'])), {}, {
     authenticate: function authenticate() {
       var _this = this;
 
@@ -6191,7 +6219,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 1;
                 _context.next = 4;
                 return _this.$apollo.mutate({
-                  mutation: _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
+                  mutation: _graphql_Login_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
                   variables: {
                     email: _this.email,
                     password: _this.password
@@ -6199,23 +6227,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _context.next = 9;
+                _this.setLoggedIn(true);
+
+                _this.$router.push({
+                  name: "board"
+                });
+
+                _context.next = 11;
                 break;
 
-              case 6:
-                _context.prev = 6;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](1);
-                _this.errors = Object(_utils__WEBPACK_IMPORTED_MODULE_3__["gqlErrors"])(_context.t0);
+                _this.errors = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["gqlErrors"])(_context.t0);
 
-              case 9:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 6]]);
+        }, _callee, null, [[1, 8]]);
       }))();
     }
-  }
+  })
 });
 
 /***/ }),
@@ -33346,7 +33380,52 @@ var render = function() {
     "div",
     { staticClass: "h-full flex flex-col items-stretch bg-green-400" },
     [
-      _vm._m(0),
+      _c(
+        "div",
+        {
+          staticClass:
+            "header text-white flex justify-between items-center bg-green-600 mb-2"
+        },
+        [
+          _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "text-lg logo opacity-50 cursor-pointer hover:opacity-75"
+            },
+            [_vm._v("Laravello")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
+            _vm.isLoggedIn
+              ? _c("div", {}, [
+                  _c("button", { staticClass: "header-btn" }, [
+                    _vm._v("Logout")
+                  ])
+                ])
+              : _c("div", {}, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "header-btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.$router.push({ name: "login" })
+                        }
+                      }
+                    },
+                    [_vm._v("Sign In")]
+                  ),
+                  _vm._v(" "),
+                  _c("button", { staticClass: "header-btn" }, [
+                    _vm._v("Register")
+                  ])
+                ])
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "h-full flex flex-1 flex-col items-stretch" }, [
         _c("div", { staticClass: "mx-4 mb-2 text-white font-bold text-lg" }, [
@@ -33383,34 +33462,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "header text-white flex justify-between items-center bg-green-600 mb-2"
-      },
-      [
-        _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "text-lg logo opacity-50 cursor-pointer hover:opacity-75"
-          },
-          [_vm._v("Laravello")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [_vm._v("x")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -51082,9 +51134,12 @@ window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('board', _pages_Board__WEBPACK_IMPORTED_MODULE_5__["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
+  apolloProvider: _apollo_config__WEBPACK_IMPORTED_MODULE_4__["default"],
   store: _vuex_config__WEBPACK_IMPORTED_MODULE_2__["default"],
   router: _router__WEBPACK_IMPORTED_MODULE_3__["default"],
-  apolloProvider: _apollo_config__WEBPACK_IMPORTED_MODULE_4__["default"]
+  beforeCreate: function beforeCreate() {
+    _vuex_config__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('setLoggedIn', localStorage.getItem('isLoggedIn') === 'true');
+  }
 });
 
 /***/ }),
@@ -52722,9 +52777,27 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = {
-  state: {},
-  mutations: {},
-  actions: {}
+  state: {
+    isLoggedIn: false
+  },
+  getters: {
+    isLoggedIn: function isLoggedIn(state) {
+      return state.isLoggedIn;
+    }
+  },
+  mutations: {
+    setLoggedIn: function setLoggedIn(state, payload) {
+      state.isLoggedIn = Boolean(payload);
+    }
+  },
+  actions: {
+    setLoggedIn: function setLoggedIn(_ref, payload) {
+      var commit = _ref.commit;
+      var isLoggedIn = Boolean(payload);
+      localStorage.setItem('isLoggedIn', isLoggedIn);
+      commit('setLoggedIn', isLoggedIn);
+    }
+  }
 };
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store(store));
 
