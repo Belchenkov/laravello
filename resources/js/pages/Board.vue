@@ -4,8 +4,9 @@
             <div class="ml-2 w-1/3">x</div>
             <div class="text-lg logo opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
             <div class="mr-2 w-1/3 flex justify-end">
-                <div class="" v-if="isLoggedIn">
-                    <button class="header-btn">Logout</button>
+                <div class="flex items-center" v-if="isLoggedIn">
+                    <div v-if="userInfo" class="text-sm mr-2">{{ userInfo.name }}</div>
+                    <button class="header-btn" @click="logoutMe">Logout</button>
                 </div>
                 <div class="" v-else>
                     <button class="header-btn" @click="$router.push({name: 'login'})">Sign In</button>
@@ -36,8 +37,9 @@
 <script>
     import List from "../components/List";
     import BoardQuery from "../graphql/BoardListsCards.gql";
+    import Logout from "../graphql/Logout.gql";
     import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from "../constants";
-    import { mapGetters } from 'vuex';
+    import { mapGetters, mapActions } from 'vuex';
 
     export default {
         components: {
@@ -49,7 +51,8 @@
         },
         computed: {
             ...mapGetters([
-                'isLoggedIn'
+                'isLoggedIn',
+                'userInfo'
             ])
         },
         apollo: {
@@ -61,6 +64,9 @@
             }
         },
         methods: {
+            ...mapActions([
+                'logout'
+            ]),
             updateQueryCache(event) {
                 const data = event.store.readQuery({
                     query: BoardQuery,
@@ -86,6 +92,13 @@
                 }
 
                 event.store.writeQuery({ query: BoardQuery, data });
+            },
+            async logoutMe() {
+                const response = await this.$apollo.mutate({
+                   mutation: Logout
+                });
+
+                this.logout();
             }
         }
     }

@@ -18,6 +18,9 @@ const store = {
     getters: {
         isLoggedIn(state) {
             return state.isLoggedIn;
+        },
+        userInfo(state) {
+            return state.user;
         }
     },
     mutations: {
@@ -41,23 +44,23 @@ const store = {
 
             commit('setUser', payload);
         },
-        async fetchCurrentUser({ commit, dispatch }, user) {
-            /*const result = await apollo.defaultClient.query({
-                query: Me,
-                fetchPolicy: "no-cache"
+        async logout({ commit }) {
+            localStorage.removeItem('user');
+
+            commit("setUser", {
+                id: null,
+                name: null,
+                email: null
             });
-            const user = result.data?.me;
-            */
+
+            dispatch("setLoggedIn", false);
+        },
+        async fetchCurrentUser({ commit, dispatch }, user) {
             if (user) {
                 commit("setUser", user);
                 dispatch("setLoggedIn", true);
             } else {
-                commit("setUser", {
-                   id: null,
-                   name: null,
-                   email: null
-                });
-                dispatch("setLoggedIn", false);
+                dispatch("logout");
             }
         }
     }
