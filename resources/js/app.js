@@ -17,5 +17,6 @@ const app = new Vue({
     router,
     beforeCreate() {
         store.dispatch('setLoggedIn', localStorage.getItem('isLoggedIn') === 'true');
+        store.dispatch('fetchCurrentUser', JSON.parse(localStorage.getItem('user')));
     }
 });
