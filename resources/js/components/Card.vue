@@ -61,42 +61,46 @@ export default {
         ])
     },
     methods: {
-        cardDelete() {
+        async cardDelete() {
             const self = this;
 
-            this.$apollo.mutate({
-                mutation: CardDelete,
-                variables: {
-                    id: this.card.id
-                },
-                update(store, { data: { cardDelete } }) {
-                    self.$emit("deleted", {
-                        store,
-                        data: cardDelete,
-                        type: EVENT_CARD_DELETED
-                    });
-                    self.$emit('closed');
-                }
-            });
+            try {
+                await this.$apollo.mutate({
+                    mutation: CardDelete,
+                    variables: {
+                        id: this.card.id
+                    },
+                    update(store, { data: { cardDelete } }) {
+                        self.$emit("deleted", {
+                            store,
+                            data: cardDelete,
+                            type: EVENT_CARD_DELETED
+                        });
+                        self.$emit('closed');
+                    }
+                });
+            } catch (err) {}
         },
-        cardUpdate() {
+        async cardUpdate() {
             const self = this;
 
-            this.$apollo.mutate({
-                mutation: CardUpdate,
-                variables: {
-                    id: self.card.id,
-                    title: self.title
-                },
-                update(store, { data: cardUpdate }) {
-                    self.$emit('updated', {
-                        store,
-                        data: cardUpdate,
-                        type: EVENT_CARD_UPDATED
-                    });
-                    self.editing = false;
-                }
-            });
+            try {
+                await this.$apollo.mutate({
+                    mutation: CardUpdate,
+                    variables: {
+                        id: self.card.id,
+                        title: self.title
+                    },
+                    update(store, { data: cardUpdate }) {
+                        self.$emit('updated', {
+                            store,
+                            data: cardUpdate,
+                            type: EVENT_CARD_UPDATED
+                        });
+                        self.editing = false;
+                    }
+                });
+            } catch (err) {}
         }
     }
 }

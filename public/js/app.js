@@ -5640,13 +5640,21 @@ function stripSymbols(data) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphql/CardDelete.gql */ "./resources/js/graphql/CardDelete.gql");
-/* harmony import */ var _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphql/CardUpdate.gql */ "./resources/js/graphql/CardUpdate.gql");
-/* harmony import */ var _graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _CardEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CardEditor */ "./resources/js/components/CardEditor.vue");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants */ "./resources/js/constants/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graphql/CardDelete.gql */ "./resources/js/graphql/CardDelete.gql");
+/* harmony import */ var _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../graphql/CardUpdate.gql */ "./resources/js/graphql/CardUpdate.gql");
+/* harmony import */ var _graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _CardEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CardEditor */ "./resources/js/components/CardEditor.vue");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../constants */ "./resources/js/constants/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5698,7 +5706,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Card",
   props: ['card'],
   components: {
-    CardEditor: _CardEditor__WEBPACK_IMPORTED_MODULE_3__["default"]
+    CardEditor: _CardEditor__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
@@ -5706,44 +5714,96 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: this.card.title
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['userInfo'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['userInfo'])),
   methods: {
     cardDelete: function cardDelete() {
-      var self = this;
-      this.$apollo.mutate({
-        mutation: _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_1___default.a,
-        variables: {
-          id: this.card.id
-        },
-        update: function update(store, _ref) {
-          var cardDelete = _ref.data.cardDelete;
-          self.$emit("deleted", {
-            store: store,
-            data: cardDelete,
-            type: _constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_DELETED"]
-          });
-          self.$emit('closed');
-        }
-      });
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var self;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                self = _this;
+                _context.prev = 1;
+                _context.next = 4;
+                return _this.$apollo.mutate({
+                  mutation: _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
+                  variables: {
+                    id: _this.card.id
+                  },
+                  update: function update(store, _ref) {
+                    var cardDelete = _ref.data.cardDelete;
+                    self.$emit("deleted", {
+                      store: store,
+                      data: cardDelete,
+                      type: _constants__WEBPACK_IMPORTED_MODULE_5__["EVENT_CARD_DELETED"]
+                    });
+                    self.$emit('closed');
+                  }
+                });
+
+              case 4:
+                _context.next = 8;
+                break;
+
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](1);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[1, 6]]);
+      }))();
     },
     cardUpdate: function cardUpdate() {
-      var self = this;
-      this.$apollo.mutate({
-        mutation: _graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
-        variables: {
-          id: self.card.id,
-          title: self.title
-        },
-        update: function update(store, _ref2) {
-          var cardUpdate = _ref2.data;
-          self.$emit('updated', {
-            store: store,
-            data: cardUpdate,
-            type: _constants__WEBPACK_IMPORTED_MODULE_4__["EVENT_CARD_UPDATED"]
-          });
-          self.editing = false;
-        }
-      });
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var self;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                self = _this2;
+                _context2.prev = 1;
+                _context2.next = 4;
+                return _this2.$apollo.mutate({
+                  mutation: _graphql_CardUpdate_gql__WEBPACK_IMPORTED_MODULE_3___default.a,
+                  variables: {
+                    id: self.card.id,
+                    title: self.title
+                  },
+                  update: function update(store, _ref2) {
+                    var cardUpdate = _ref2.data;
+                    self.$emit('updated', {
+                      store: store,
+                      data: cardUpdate,
+                      type: _constants__WEBPACK_IMPORTED_MODULE_5__["EVENT_CARD_UPDATED"]
+                    });
+                    self.editing = false;
+                  }
+                });
+
+              case 4:
+                _context2.next = 8;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](1);
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 6]]);
+      }))();
     }
   }
 });
@@ -51173,6 +51233,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! apollo-boost */ "./node_modules/apollo-boost/lib/bundle.esm.js");
 /* harmony import */ var vue_apollo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-apollo */ "./node_modules/vue-apollo/dist/vue-apollo.esm.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./resources/js/utils.js");
+/* harmony import */ var _vuex_config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./vuex.config */ "./resources/js/vuex.config.js");
+
+
 
 
 
@@ -51184,7 +51248,15 @@ var apolloClient = new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["default"]({
   },
   credentials: 'include',
   onError: function onError(err) {
-    return console.log(err);
+    console.log(err);
+
+    try {
+      Object(_utils__WEBPACK_IMPORTED_MODULE_3__["gqlErrors"])(err);
+    } catch (err) {
+      if (err instanceof _utils__WEBPACK_IMPORTED_MODULE_3__["AuthError"]) {
+        _vuex_config__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch("logout");
+      }
+    }
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (new vue_apollo__WEBPACK_IMPORTED_MODULE_2__["default"]({
@@ -53066,12 +53138,37 @@ var routes = [{
 /*!*******************************!*\
   !*** ./resources/js/utils.js ***!
   \*******************************/
-/*! exports provided: gqlErrors */
+/*! exports provided: gqlErrors, AuthError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gqlErrors", function() { return gqlErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthError", function() { return AuthError; });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 function gqlErrors(err) {
   var hasInternal = function hasInternal(errors) {
     return errors.some(function (e) {
@@ -53084,6 +53181,10 @@ function gqlErrors(err) {
       return !e.internal;
     }).concat(err) : errors;
   };
+
+  if ((err === null || err === void 0 ? void 0 : err.networkError) && err.networkError.statusCode === 419) {
+    throw new AuthError("Unauthenticated!");
+  }
 
   return replaceInternal(((err === null || err === void 0 ? void 0 : err.graphQLErrors) || []).map(function (error) {
     var _error$extensions, _error$path;
@@ -53110,6 +53211,19 @@ function gqlErrors(err) {
     message: 'Something bad happened'
   }).flat();
 }
+var AuthError = /*#__PURE__*/function (_Error) {
+  _inherits(AuthError, _Error);
+
+  var _super = _createSuper(AuthError);
+
+  function AuthError() {
+    _classCallCheck(this, AuthError);
+
+    return _super.apply(this, arguments);
+  }
+
+  return AuthError;
+}( /*#__PURE__*/_wrapNativeSuper(Error));
 
 /***/ }),
 
