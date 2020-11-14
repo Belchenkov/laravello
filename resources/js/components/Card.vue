@@ -5,7 +5,10 @@
             class="group shadow-card bg-white card rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2 flex justify-between"
         >
             <div>{{ card.title }}</div>
-            <div class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500">
+            <div
+                v-if="card.owner.id === userInfo.id"
+                class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500"
+            >
                 <div
                     @click="editing = true"
                     class="cursor-pointer text-orange-400 hover:text-orange-500 pr-3"
@@ -32,6 +35,7 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import CardDelete from "../graphql/CardDelete.gql";
 import CardUpdate from "../graphql/CardUpdate.gql";
 import CardEditor from "./CardEditor";
@@ -50,6 +54,11 @@ export default {
             editing: false,
             title: this.card.title
         }
+    },
+    computed: {
+        ...mapGetters([
+            'userInfo'
+        ])
     },
     methods: {
         cardDelete() {

@@ -44,7 +44,7 @@ const store = {
 
             commit('setUser', payload);
         },
-        async logout({ commit }) {
+        async logout({ commit, dispatch }) {
             localStorage.removeItem('user');
 
             commit("setUser", {

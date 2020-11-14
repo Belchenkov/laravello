@@ -99,6 +99,8 @@
                 });
 
                 this.logout();
+
+                this.$router.push({ name: "login" });
             }
         }
     }
