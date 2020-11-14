@@ -6070,6 +6070,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants */ "./resources/js/constants/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6118,6 +6119,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -6130,12 +6135,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['isLoggedIn', 'userInfo'])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['isLoggedIn', 'userInfo'])), {}, {
+    bgColor: function bgColor() {
+      var _this$board;
+
+      return _defineProperty({
+        "bg-gray-500": this.$apollo.loading
+      }, _utils__WEBPACK_IMPORTED_MODULE_6__["colorMap500"][(_this$board = this.board) === null || _this$board === void 0 ? void 0 : _this$board.color], true);
+    }
+  }),
   apollo: {
     board: {
       query: _graphql_BoardListsCards_gql__WEBPACK_IMPORTED_MODULE_2___default.a,
-      variables: {
-        id: 1
+      variables: function variables() {
+        return {
+          id: Number(this.$route.params.id)
+        };
       }
     }
   },
@@ -6580,7 +6595,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".logo[data-v-4227d42d] {\n  font-size: 25px;\n  font-weight: 900;\n  text-shadow: 0 1px 3px rgba(0, 0, 0, .8);\n}\n.header[data-v-4227d42d] {\n  height: 40px;\n  box-shadow: 0 0 5px rgba(0, 0, 0, .8);\n}\n", ""]);
+exports.push([module.i, ".logo[data-v-4227d42d] {\n  font-size: 25px;\n  font-weight: 900;\n  text-shadow: 0 1px 3px rgba(0, 0, 0, .8);\n}\n.header[data-v-4227d42d] {\n  height: 40px;\n  box-shadow: 0 0 5px rgba(0, 0, 0, .8);\n  background: rgba(0, 0, 0, .2);\n}\n", ""]);
 
 // exports
 
@@ -33515,13 +33530,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "h-full flex flex-col items-stretch bg-green-400" },
+    { staticClass: "h-full flex flex-col items-stretch", class: _vm.bgColor },
     [
       _c(
         "div",
         {
           staticClass:
-            "header text-white flex justify-between items-center bg-green-600 mb-2"
+            "header text-white flex justify-between items-center mb-2"
         },
         [
           _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
@@ -53115,7 +53130,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
-  path: "/",
+  path: "/board/:id",
   name: "board",
   component: _pages_Board__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
@@ -53138,13 +53153,14 @@ var routes = [{
 /*!*******************************!*\
   !*** ./resources/js/utils.js ***!
   \*******************************/
-/*! exports provided: gqlErrors, AuthError */
+/*! exports provided: gqlErrors, AuthError, colorMap500 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gqlErrors", function() { return gqlErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthError", function() { return AuthError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorMap500", function() { return colorMap500; });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53224,6 +53240,17 @@ var AuthError = /*#__PURE__*/function (_Error) {
 
   return AuthError;
 }( /*#__PURE__*/_wrapNativeSuper(Error));
+var colorMap500 = {
+  teal: "bg-teal-500",
+  orange: "bg-orange-500",
+  gray: "bg-gray-500",
+  yellow: "bg-yellow-500",
+  purple: "bg-purple-500",
+  red: "bg-red-500",
+  green: "bg-green-500",
+  blue: "bg-blue-500",
+  indigo: "bg-indigo-500"
+};
 
 /***/ }),
 
