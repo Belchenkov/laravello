@@ -21677,6 +21677,17 @@ body {
           animation: bounce 1s infinite;
 }
 
+.appear-enter-active,
+.appear-leave-active {
+  transition: all 1s ease-in;
+}
+
+.appear-enter,
+.appear-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
