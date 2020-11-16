@@ -12,7 +12,7 @@ module.exports = {
     },
   },
   variants: {
-      opacity: ['group-hover']
+      opacity: ['group-hover', 'hover']
   },
   plugins: [],
 }

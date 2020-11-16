@@ -6139,6 +6139,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6150,7 +6166,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     List: _components_List__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      showBoards: false
+    };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['isLoggedIn', 'userInfo'])), {}, {
     bgColor: function bgColor() {
@@ -6385,7 +6403,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this.setLoggedIn(true);
 
                   _this.$router.push({
-                    name: "board"
+                    name: "board",
+                    params: {
+                      id: 1
+                    }
                   });
                 }
 
@@ -33560,7 +33581,62 @@ var render = function() {
             "header text-white flex justify-between items-center mb-2"
         },
         [
-          _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("x")]),
+          _c("div", { staticClass: "ml-2 w-1/3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "header-btn",
+                on: {
+                  click: function($event) {
+                    _vm.showBoards = !_vm.showBoards
+                  }
+                }
+              },
+              [_vm._v("Boards")]
+            ),
+            _vm._v(" "),
+            _vm.showBoards
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2"
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "text-gray-600 text-xs font-semibold mb-2 ml-2"
+                      },
+                      [_vm._v("BOARDS")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(8, function(n) {
+                      return _c(
+                        "div",
+                        {
+                          key: n,
+                          staticClass:
+                            "m-2 bg-teal-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+                        },
+                        [
+                          _c("div", {
+                            staticClass:
+                              "bg-teal-200 w-10 rounded-sm rounded-r-none"
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "p-2" }, [
+                            _vm._v("The board " + _vm._s(n + 1))
+                          ])
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              : _vm._e()
+          ]),
           _vm._v(" "),
           _c(
             "div",
