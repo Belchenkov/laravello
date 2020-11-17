@@ -21638,6 +21638,10 @@ video {
           animation: bounce 1s infinite;
 }
 
+body {
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
