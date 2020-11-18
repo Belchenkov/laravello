@@ -21679,7 +21679,7 @@ body {
 
 .appear-enter-active,
 .appear-leave-active {
-  transition: all 1s ease-in;
+  transition: all 50ms ease-in;
 }
 
 .appear-enter,
