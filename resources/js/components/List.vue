@@ -7,23 +7,41 @@
             v-for="card in list.cards"
             :key="card.id"
             :card="card"
+            @deleted="$emit('card-deleted', { ...$event, listId: list.id })"
+            @updated="$emit('card-updated', { ...$event, listId: list.id })"
         />
-        <CardAddButton />
+        <CardAddEditor
+            :list="list"
+            @closed="editing = false"
+            @added="$emit('card-added', { ...$event, listId: list.id })"
+            v-if="editing"
+        />
+        <CardAddButton
+            @click="editing = true"
+            v-else
+        />
     </div>
 </template>
 
 <script>
 import Card from "./Card";
 import CardAddButton from "./CardAddButton";
+import CardAddEditor from "./CardAddEditor";
 
 export default {
     name: "List",
     props: [
         'list'
     ],
+    data() {
+        return {
+            editing: false
+        }
+    },
     components: {
         Card,
-        CardAddButton
+        CardAddButton,
+        CardAddEditor
     }
 }
 </script>
