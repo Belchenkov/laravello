@@ -1,8 +1,22 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 
 body {
     font-family: 'Titillium Web', sans-serif !important;
 }
+
+.header-btn {
+    background: hsla(0, 0%, 100%, .3);
+    @apply rounded-sm px-2 py-1 text-sm font-bold outline-none whitespace-no-wrap
+}
+
+.header-btn:focus {
+    @apply outline-none;
+}
+
+.header-btn:hover {
+    @apply opacity-75;
+}
+
+@tailwind utilities;

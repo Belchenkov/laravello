@@ -614,6 +614,33 @@ video {
   }
 }
 
+body {
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.header-btn {
+  background: hsla(0, 0%, 100%, .3);
+  border-radius: 0.125rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  white-space: nowrap
+}
+
+.header-btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.header-btn:hover {
+  opacity: 0.75;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));
@@ -21628,10 +21655,6 @@ video {
 .animate-bounce {
   -webkit-animation: bounce 1s infinite;
           animation: bounce 1s infinite;
-}
-
-body {
-  font-family: 'Titillium Web', sans-serif !important;
 }
 
 @media (min-width: 640px) {

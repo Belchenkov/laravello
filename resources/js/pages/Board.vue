@@ -3,7 +3,16 @@
         <div class="header text-white flex justify-between items-center bg-green-600 mb-2">
             <div class="ml-2 w-1/3">x</div>
             <div class="text-lg logo opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
-            <div class="mr-2 w-1/3 flex justify-end">x</div>
+            <div class="mr-2 w-1/3 flex justify-end">
+                <div class="flex items-center" v-if="isLoggedIn">
+                    <div v-if="userInfo" class="text-sm mr-2">{{ userInfo.name }}</div>
+                    <button class="header-btn" @click="logoutMe">Logout</button>
+                </div>
+                <div class="" v-else>
+                    <button class="header-btn" @click="$router.push({name: 'login'})">Sign In</button>
+                    <button class="header-btn">Register</button>
+                </div>
+            </div>
         </div>
 
         <div class="h-full flex flex-1 flex-col items-stretch">
@@ -28,11 +37,23 @@
 <script>
     import List from "../components/List";
     import BoardQuery from "../graphql/BoardListsCards.gql";
-    import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "../constants";
+    import Logout from "../graphql/Logout.gql";
+    import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from "../constants";
+    import { mapGetters, mapActions } from 'vuex';
 
     export default {
         components: {
             List
+        },
+        data() {
+          return {
+          }
+        },
+        computed: {
+            ...mapGetters([
+                'isLoggedIn',
+                'userInfo'
+            ])
         },
         apollo: {
             board: {
@@ -43,6 +64,9 @@
             }
         },
         methods: {
+            ...mapActions([
+                'logout'
+            ]),
             updateQueryCache(event) {
                 const data = event.store.readQuery({
                     query: BoardQuery,
@@ -68,6 +92,13 @@
                 }
 
                 event.store.writeQuery({ query: BoardQuery, data });
+            },
+            async logoutMe() {
+                const response = await this.$apollo.mutate({
+                   mutation: Logout
+                });
+
+                this.logout();
             }
         }
     }

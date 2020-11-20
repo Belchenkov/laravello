@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex';
 import Login from "../graphql/Login.gql";
 import Errors from "../components/Errors";
 import { gqlErrors } from "../utils";
@@ -80,17 +81,27 @@ export default {
         Errors
     },
     methods: {
+        ...mapActions([
+            'setLoggedIn',
+            'setUser'
+        ]),
         async authenticate() {
             this.errros = [];
 
             try {
-                await this.$apollo.mutate({
+                const result = await this.$apollo.mutate({
                     mutation: Login,
                     variables: {
                         email: this.email,
                         password: this.password
                     }
                 });
+                const user = result?.data?.login;
+
+                this.setUser(user);
+                this.setLoggedIn(true);
+
+                this.$router.push({ name: "board" });
             } catch (err) {
                 this.errors = gqlErrors(err);
             }
