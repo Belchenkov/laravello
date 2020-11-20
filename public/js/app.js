@@ -5641,6 +5641,28 @@ function stripSymbols(data) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal */ "./resources/js/components/Modal.vue");
+/* harmony import */ var _BoardColor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BoardColor */ "./resources/js/components/BoardColor.vue");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5666,16 +5688,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     show: Boolean
   },
   name: "BoardAddModal",
   components: {
-    Modal: _Modal__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Modal: _Modal__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BoardColor: _BoardColor__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      color: "orange",
+      title: null
+    };
+  },
+  computed: {
+    colors: function colors() {
+      return _utils__WEBPACK_IMPORTED_MODULE_2__["colorMap500"];
+    },
+    colorGrid: function colorGrid() {
+      return _utils__WEBPACK_IMPORTED_MODULE_2__["colorGrid"];
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BoardColor.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BoardColor.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "BoardColor",
+  props: {
+    color: String,
+    activeColor: String
+  },
+  computed: {
+    colors: function colors() {
+      return _utils__WEBPACK_IMPORTED_MODULE_0__["colorMap500"];
+    }
   }
 });
 
@@ -33678,7 +33749,7 @@ var render = function() {
   return _c(
     "modal",
     {
-      attrs: { width: 300, height: 250, show: _vm.show },
+      attrs: { width: 400, height: 250, show: _vm.show },
       on: {
         closed: function($event) {
           return _vm.$emit("closed")
@@ -33689,7 +33760,10 @@ var render = function() {
       _c("div", { staticClass: "flex" }, [
         _c(
           "div",
-          { staticClass: "rounded-sm p-4 text-black w-full mr-2 bg-teal-700" },
+          {
+            staticClass: "rounded-sm p-4 text-black w-full mr-2",
+            class: [_vm.colors[_vm.color]]
+          },
           [
             _c("input", {
               staticClass:
@@ -33697,6 +33771,29 @@ var render = function() {
               attrs: { type: "text", placeholder: "Add board title" }
             })
           ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          _vm._l(_vm.colorGrid, function(row, i) {
+            return _c(
+              "div",
+              { key: i, staticClass: "flex justify-between mb-2" },
+              _vm._l(row, function(c, i) {
+                return _c("board-color", {
+                  key: i,
+                  attrs: { color: c, "active-color": _vm.color },
+                  on: {
+                    changed: function($event) {
+                      _vm.color = $event
+                    }
+                  }
+                })
+              }),
+              1
+            )
+          }),
+          0
         )
       ]),
       _vm._v(" "),
@@ -33705,12 +33802,53 @@ var render = function() {
           "button",
           {
             staticClass:
-              "rounded-sm py-2 px-4 text-black cursor-pointer bg-teal-300 hover:bg-teal-500"
+              "rounded-sm py-2 px-4 text-white cursor-pointer hover:opacity-75",
+            class: [_vm.colors[_vm.color]]
           },
-          [_vm._v("\n            Create\n        ")]
+          [
+            _c("i", { staticClass: "fas fa-plus mr-2" }),
+            _vm._v("\n            Create\n        ")
+          ]
         )
       ])
     ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BoardColor.vue?vue&type=template&id=0095f370&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BoardColor.vue?vue&type=template&id=0095f370&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "flex justify-center items-center text-white text-xl w-6 h-6 md:w-8 md:h-8 mr-1 md:mr-2 rounded-sm cursor-pointer",
+      class: [_vm.colors[_vm.color]],
+      on: {
+        click: function($event) {
+          return _vm.$emit("changed", _vm.color)
+        }
+      }
+    },
+    [_vm.activeColor === _vm.color ? _c("span", [_vm._v("✓")]) : _vm._e()]
   )
 }
 var staticRenderFns = []
@@ -34346,7 +34484,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "ml-2 w-1/3" },
-            [_c("user-boards-dropdown")],
+            [_vm.isLoggedIn ? _c("user-boards-dropdown") : _vm._e()],
             1
           ),
           _vm._v(" "),
@@ -52229,6 +52367,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/BoardColor.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/BoardColor.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BoardColor_vue_vue_type_template_id_0095f370_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BoardColor.vue?vue&type=template&id=0095f370&scoped=true& */ "./resources/js/components/BoardColor.vue?vue&type=template&id=0095f370&scoped=true&");
+/* harmony import */ var _BoardColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BoardColor.vue?vue&type=script&lang=js& */ "./resources/js/components/BoardColor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BoardColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BoardColor_vue_vue_type_template_id_0095f370_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BoardColor_vue_vue_type_template_id_0095f370_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0095f370",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BoardColor.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/BoardColor.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/BoardColor.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BoardColor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BoardColor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardColor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/BoardColor.vue?vue&type=template&id=0095f370&scoped=true&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/BoardColor.vue?vue&type=template&id=0095f370&scoped=true& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardColor_vue_vue_type_template_id_0095f370_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BoardColor.vue?vue&type=template&id=0095f370&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BoardColor.vue?vue&type=template&id=0095f370&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardColor_vue_vue_type_template_id_0095f370_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardColor_vue_vue_type_template_id_0095f370_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Card.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Card.vue ***!
@@ -54429,7 +54636,7 @@ var routes = [{
 /*!*******************************!*\
   !*** ./resources/js/utils.js ***!
   \*******************************/
-/*! exports provided: gqlErrors, AuthError, colorMap500, colorMap100, colorMap200 */
+/*! exports provided: gqlErrors, AuthError, colorMap500, colorMap100, colorMap200, colorGrid */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54439,6 +54646,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorMap500", function() { return colorMap500; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorMap100", function() { return colorMap100; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorMap200", function() { return colorMap200; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorGrid", function() { return colorGrid; });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54551,6 +54759,7 @@ var colorMap200 = {
   blue: "bg-blue-200",
   indigo: "bg-indigo-200"
 };
+var colorGrid = [["teal", "orange", "gray"], ["yellow", "purple", "red"], ["green", "blue", "indigo"]];
 
 /***/ }),
 
