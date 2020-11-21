@@ -13,8 +13,11 @@ type Query {
 
 type Mutation {
     cardAdd(input: CardAddInput @spread): Card! @create
+        @can(ability: "createCard", model: "App\\Models\\CardList", find: "list_id")
     cardUpdate(id: ID!, title: String): Card! @update
+        @can(ability: "update", find: "id")
     cardDelete(id: ID!): Card @delete
+        @can(ability: "delete", find: "id")
 
     login(email: String!, password: String!): User!
     logout: User

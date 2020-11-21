@@ -98,10 +98,12 @@ export default {
                 });
                 const user = result?.data?.login;
 
-                this.setUser(user);
-                this.setLoggedIn(true);
+                if (user) {
+                    this.setUser(user);
+                    this.setLoggedIn(true);
 
-                this.$router.push({ name: "board" });
+                    this.$router.push({ name: "board" });
+                }
             } catch (err) {
                 this.errors = gqlErrors(err);
             }

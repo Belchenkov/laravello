@@ -5,7 +5,10 @@
             class="group shadow-card bg-white card rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2 flex justify-between"
         >
             <div>{{ card.title }}</div>
-            <div class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500">
+            <div
+                v-if="card.owner.id === userInfo.id"
+                class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500"
+            >
                 <div
                     @click="editing = true"
                     class="cursor-pointer text-orange-400 hover:text-orange-500 pr-3"
@@ -32,6 +35,7 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import CardDelete from "../graphql/CardDelete.gql";
 import CardUpdate from "../graphql/CardUpdate.gql";
 import CardEditor from "./CardEditor";
@@ -51,43 +55,52 @@ export default {
             title: this.card.title
         }
     },
+    computed: {
+        ...mapGetters([
+            'userInfo'
+        ])
+    },
     methods: {
-        cardDelete() {
+        async cardDelete() {
             const self = this;
 
-            this.$apollo.mutate({
-                mutation: CardDelete,
-                variables: {
-                    id: this.card.id
-                },
-                update(store, { data: { cardDelete } }) {
-                    self.$emit("deleted", {
-                        store,
-                        data: cardDelete,
-                        type: EVENT_CARD_DELETED
-                    });
-                    self.$emit('closed');
-                }
-            });
+            try {
+                await this.$apollo.mutate({
+                    mutation: CardDelete,
+                    variables: {
+                        id: this.card.id
+                    },
+                    update(store, { data: { cardDelete } }) {
+                        self.$emit("deleted", {
+                            store,
+                            data: cardDelete,
+                            type: EVENT_CARD_DELETED
+                        });
+                        self.$emit('closed');
+                    }
+                });
+            } catch (err) {}
         },
-        cardUpdate() {
+        async cardUpdate() {
             const self = this;
 
-            this.$apollo.mutate({
-                mutation: CardUpdate,
-                variables: {
-                    id: self.card.id,
-                    title: self.title
-                },
-                update(store, { data: cardUpdate }) {
-                    self.$emit('updated', {
-                        store,
-                        data: cardUpdate,
-                        type: EVENT_CARD_UPDATED
-                    });
-                    self.editing = false;
-                }
-            });
+            try {
+                await this.$apollo.mutate({
+                    mutation: CardUpdate,
+                    variables: {
+                        id: self.card.id,
+                        title: self.title
+                    },
+                    update(store, { data: cardUpdate }) {
+                        self.$emit('updated', {
+                            store,
+                            data: cardUpdate,
+                            type: EVENT_CARD_UPDATED
+                        });
+                        self.editing = false;
+                    }
+                });
+            } catch (err) {}
         }
     }
 }

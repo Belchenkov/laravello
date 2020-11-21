@@ -1,13 +1,14 @@
 mutation CardAdd(
   $listId: ID!,
   $title: String!,
-  $order: Int!
+  $order: Int!,
+  $ownerId: ID!
 ) {
     cardAdd(input: {
       title: $title,
       list_id: $listId,
       order: $order,
-      owner_id: 1
+      owner_id: $ownerId
     }) {
     	id
     	title
