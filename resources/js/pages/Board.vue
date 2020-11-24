@@ -34,6 +34,8 @@
                     :key="list.id"
                     :list="list"
                 />
+
+                <list-add-editor></list-add-editor>
             </div>
         </div>
     </div>
@@ -42,6 +44,7 @@
 <script>
     import UserBoardsDropdown from "../components/UserBoardsDropdown";
     import List from "../components/List";
+    import ListAddEditor from "../components/ListAddEditor";
     import BoardQuery from "../graphql/BoardListsCards.gql";
     import Logout from "../graphql/Logout.gql";
     import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from "../constants";
@@ -51,7 +54,8 @@
     export default {
         components: {
             List,
-            UserBoardsDropdown
+            UserBoardsDropdown,
+            ListAddEditor
         },
         data() {
           return {

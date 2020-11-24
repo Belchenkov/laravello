@@ -21708,6 +21708,11 @@ body {
   transform: translateY(20px);
 }
 
+.list {
+  min-width: 230px;
+  width: 230px;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
