@@ -35,7 +35,10 @@
                     :list="list"
                 />
 
-                <list-add-editor></list-add-editor>
+                <list-add-editor
+                    :board="board.id"
+                    @added="updateQueryCache($event)"
+                ></list-add-editor>
             </div>
         </div>
     </div>
@@ -47,7 +50,12 @@
     import ListAddEditor from "../components/ListAddEditor";
     import BoardQuery from "../graphql/BoardListsCards.gql";
     import Logout from "../graphql/Logout.gql";
-    import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from "../constants";
+    import {
+        EVENT_LIST_ADDED,
+        EVENT_CARD_ADDED,
+        EVENT_CARD_DELETED,
+        EVENT_CARD_UPDATED
+    } from "../constants";
     import { mapGetters, mapActions } from 'vuex';
     import { colorMap500 } from "../utils";
 
@@ -101,6 +109,9 @@
                 };
 
                 switch (event.type) {
+                    case EVENT_LIST_ADDED:
+                        data.board.lists.push(event.data);
+                        break;
                     case EVENT_CARD_ADDED:
                         listById().cards.push(event.data);
                         break;
