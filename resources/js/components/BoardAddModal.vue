@@ -8,6 +8,7 @@
         <div class="flex">
             <div class="rounded-sm p-4 text-black w-full mr-2" :class="[colors[color]]">
                 <input
+                    v-model.trim="title"
                     type="text"
                     placeholder="Add board title"
                     class="title rounded-sm text-white outline-none py-1 px-2 font-bold w-full hover:opacity-50 placeholder-gray-100"
@@ -32,8 +33,10 @@
 
         <div class="mt-4">
             <button
+                @click="addBoard"
+                :disabled="cannotCrete"
                 :class="[colors[color]]"
-                class="rounded-sm py-2 px-4 text-white cursor-pointer hover:opacity-75"
+                class="disabled:opacity-25 rounded-sm py-2 px-4 text-white cursor-pointer hover:opacity-75"
             >
                 <i class="fas fa-plus mr-2"></i>
                 Create
@@ -43,9 +46,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 import Modal from "./Modal";
 import BoardColor from "./BoardColor";
 import { colorGrid, colorMap500 } from "../utils";
+import BoardAdd from '../graphql/BoardAdd.gql';
+import UserBoards from '../graphql/UserBoards.gql';
 
 export default {
     props: {
@@ -63,8 +70,43 @@ export default {
         }
     },
     computed: {
+        ...mapState({
+            userId: state => state.user.id
+        }),
         colors: () => colorMap500,
-        colorGrid: () => colorGrid
+        colorGrid: () => colorGrid,
+        cannotCrete() {
+            return this.title === null || this.title.length === 0;
+        }
+    },
+    methods: {
+        addBoard() {
+            const self = this;
+
+            this.$apollo.mutate({
+               mutation: BoardAdd,
+               variables: {
+                   title: this.title,
+                   color: this.color
+               },
+               update(store, { data: { boardAdd } }) {
+                    const data = store.readQuery({
+                        query: UserBoards,
+                        variables: { userId: self.userId }
+                    });
+
+                    data.userBoards.push(boardAdd);
+
+                    store.writeQuery({
+                        query: UserBoards,
+                        data,
+                        variables: { userId: self.userId }
+                    });
+
+                    self.$emit("closed");
+               }
+            });
+        }
     }
 }
 </script>

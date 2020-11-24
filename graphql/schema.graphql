@@ -5,6 +5,7 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
+
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
     userBoards(owner_id: ID! @where): [Board!] @all
@@ -16,6 +17,8 @@ type Mutation {
     cardAdd(input: CardAddInput @spread): Card! @create
     cardUpdate(id: ID!, title: String): Card! @update
     cardDelete(id: ID!): Card @delete
+
+    boardAdd(title: String!, color: String!): Board! @create
 
     login(email: String!, password: String!): User!
     logout: User
