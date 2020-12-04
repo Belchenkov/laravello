@@ -9,6 +9,11 @@ Vue.use(VueRouter);
 
 const routes = [
     {
+        path: "/",
+        name: "root",
+        redirect: '/board/1'
+    },
+    {
         path: "/board/:id",
         name: "board",
         component: Board

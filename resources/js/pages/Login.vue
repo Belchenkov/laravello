@@ -102,7 +102,12 @@ export default {
                     this.setUser(user);
                     this.setLoggedIn(true);
 
-                    this.$router.push({ name: "board" });
+                    this.$router.push({
+                        name: "board",
+                        params: {
+                            id: 1
+                        }
+                    });
                 }
             } catch (err) {
                 this.errors = gqlErrors(err);

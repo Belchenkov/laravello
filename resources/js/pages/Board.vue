@@ -4,7 +4,9 @@
         class="h-full flex flex-col items-stretch"
     >
         <div class="header text-white flex justify-between items-center mb-2">
-            <div class="ml-2 w-1/3">x</div>
+            <div class="ml-2 w-1/3">
+                <user-boards-dropdown v-if="isLoggedIn"></user-boards-dropdown>
+            </div>
             <div class="text-lg logo opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
             <div class="mr-2 w-1/3 flex justify-end">
                 <div class="flex items-center" v-if="isLoggedIn">
@@ -32,25 +34,40 @@
                     :key="list.id"
                     :list="list"
                 />
+
+                <list-add-editor
+                    :board="board.id"
+                    @added="updateQueryCache($event)"
+                ></list-add-editor>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import UserBoardsDropdown from "../components/UserBoardsDropdown";
     import List from "../components/List";
+    import ListAddEditor from "../components/ListAddEditor";
     import BoardQuery from "../graphql/BoardListsCards.gql";
     import Logout from "../graphql/Logout.gql";
-    import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from "../constants";
+    import {
+        EVENT_LIST_ADDED,
+        EVENT_CARD_ADDED,
+        EVENT_CARD_DELETED,
+        EVENT_CARD_UPDATED
+    } from "../constants";
     import { mapGetters, mapActions } from 'vuex';
     import { colorMap500 } from "../utils";
 
     export default {
         components: {
-            List
+            List,
+            UserBoardsDropdown,
+            ListAddEditor
         },
         data() {
           return {
+              showBoards: false
           }
         },
         computed: {
@@ -92,6 +109,9 @@
                 };
 
                 switch (event.type) {
+                    case EVENT_LIST_ADDED:
+                        data.board.lists.push(event.data);
+                        break;
                     case EVENT_CARD_ADDED:
                         listById().cards.push(event.data);
                         break;
@@ -103,7 +123,11 @@
                         break;
                 }
 
-                event.store.writeQuery({ query: BoardQuery, data });
+                event.store.writeQuery({
+                    query: BoardQuery,
+                    data,
+                    variables: { id: Number(this.board.id) }
+                });
             },
             async logoutMe() {
                 const response = await this.$apollo.mutate({
